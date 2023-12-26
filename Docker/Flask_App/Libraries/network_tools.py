@@ -2,7 +2,7 @@ import os
 from socket import socket, AF_INET, SOCK_STREAM, gethostbyaddr, gethostbyname, gethostname
 import concurrent.futures
 import time
-from typing import Dict, List
+from typing import Optional, Dict, List
 import paramiko
 from stat import S_ISDIR
 
@@ -471,7 +471,8 @@ def print_ip_table(ip_hostname_pack, logger_hook=None):
 ### FQDN Tools ###
 ##################
 
-def create_hosts_file(ip_address_hostnames_list: List[Dict[str, str]]=[], folder:str="/", logger_hook=None):
+def create_hosts_file(ip_address_hostnames_list: Optional[List[Dict[str, str]]]=None, folder:str="/", logger_hook=None):
+    ip_address_hostnames_list = [] if ip_address_hostnames_list is None else ip_address_hostnames_list
     
     if logger_hook is not None:
         local_logger = logger_hook
